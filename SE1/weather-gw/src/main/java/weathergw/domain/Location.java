@@ -37,13 +37,13 @@ public class Location implements Iterable<WeatherInfo> {
     }
 	
 	public List<WeatherInfo> getHistory(LocalDate start, LocalDate end){
-		List <WeatherInfo> wil = new List <WeatherInfo>;
-		Iterator it = this.iterator();
+		List <WeatherInfo> wil = new ArrayList<WeatherInfo>();
+		Iterator<WeatherInfo> it = this.iterator();
 		
 		while(it.hasNext())
 		{
-			weatherInfo wi = it.next();
-			if(wi.getDate() > start && wi.getDate() < end)
+			WeatherInfo wi = it.next();
+			if(wi.getDate().isAfter(start) && wi.getDate().isBefore(end))
 				wil.add(wi);
 		}
 		return wil;	
