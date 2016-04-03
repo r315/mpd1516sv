@@ -3,20 +3,18 @@ package weathergw.dal;
 import weathergw.domain.WeatherInfo;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URISyntaxException;
+import java.net.URI;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static java.nio.file.StandardOpenOption.CREATE_NEW;
-import static java.nio.file.StandardOpenOption.WRITE;
+import static java.nio.file.StandardOpenOption.CREATE;
+import static java.nio.file.StandardOpenOption.APPEND;
 
 import java.util.Collection;
 import java.util.List;
@@ -45,10 +43,10 @@ public class WeatherInfoServiceSupplier extends WeatherInfoCsvSupplier implement
             String filename = t.split("&")[0]+"-data.csv";
             
             List<String> lines = reader.lines().collect(toList());            
-            Path path = Paths.get(ClassLoader.getSystemResource(filename).toURI());          
-            Files.write(path, lines, new OpenOption[] { WRITE, CREATE_NEW });            
+            Path path = Paths.get(URI.create(getClass().getResource("/").toString() + filename));          
+            Files.write(path, lines, new OpenOption[] { APPEND, CREATE });            
             return lines;          
-        } catch (IOException | URISyntaxException e) {
+        } catch (IOException e) {
             // TODO Should log to some log mechanism
             e.printStackTrace();
             return null;

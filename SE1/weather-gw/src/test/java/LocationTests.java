@@ -1,16 +1,20 @@
+import static java.nio.file.StandardOpenOption.CREATE;
+import static java.nio.file.StandardOpenOption.APPEND;
 import org.junit.Before;
 import org.junit.Test;
 
 import weathergw.domain.Location;
 import weathergw.domain.WeatherInfo;
 
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.OpenOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.junit.Assert;
 
 /**
@@ -70,5 +74,19 @@ public class LocationTests {
          Assert.assertEquals(2, wil.size());         
     }   
     
-    
+    @Test
+    public void pathTest(){
+    	  List<String> lines = new ArrayList<String>();     
+    	  lines.add("teste");
+          Path path;
+		try {
+			String filename = getClass().getResource("/").toString() + "teste.txt";
+			path = Paths.get(URI.create(filename));
+			Files.write(path, lines, new OpenOption[] { APPEND, CREATE });
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.toString());
+		}          
+                  
+    }
 }
