@@ -2,6 +2,8 @@ package weathergw.domain;
 
 import java.time.LocalDate;
 import java.util.*;
+import weathergw.common.SupplierManager;
+import weathergw.common.SupplierManager.WeatherInfoFilter;
 
 /**
  * Created by lfalcao on 07/03/16.
@@ -15,7 +17,10 @@ public class Location implements Iterable<WeatherInfo> {
         weatherInfos = new HashMap<LocalDate, WeatherInfo>();
     }
 
-
+    public String getName(){
+    	return name;
+    }
+    
     public void add(WeatherInfo weatherInfo) {
         Objects.requireNonNull(weatherInfo, "weatherInfo cannot be null");
 
@@ -34,18 +39,10 @@ public class Location implements Iterable<WeatherInfo> {
 
     public Collection<WeatherInfo> weatherInfos() {
         return Collections.unmodifiableCollection(weatherInfos.values());
-    }
-	
-	public List<WeatherInfo> getHistory(LocalDate start, LocalDate end){
-		List <WeatherInfo> wil = new ArrayList<WeatherInfo>();
-		Iterator<WeatherInfo> it = this.iterator();
-		
-		while(it.hasNext())
-		{
-			WeatherInfo wi = it.next();
-			if(wi.getDate().isAfter(start) && wi.getDate().isBefore(end))
-				wil.add(wi);
-		}
-		return wil;	
+    }    
+    
+	public List<WeatherInfo> getHistory(LocalDate start, LocalDate end){		
+		WeatherInfoFilter fl = (w,s,e) -> (w.getDate().isAfter(s) && w.getDate().isBefore(e));		
+		return SupplierManager.weatherInfoAdder(this,start,end,fl);		
 	}
 }

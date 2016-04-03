@@ -23,7 +23,7 @@ public class WeatherInfoFileSupplier extends WeatherInfoCsvSupplier implements S
 
     protected List<String> readFile() {
         try {
-            //ClassLoader.getSystemResource
+            //ClassLoader.getSystemResource        	
             Path p = Paths.get(ClassLoader.getSystemResource(location).toURI());
             return Files.readAllLines(p);
 
