@@ -52,25 +52,23 @@ public class LocationTests {
     	location.add(weatherInfo1);
         location.add(weatherInfo2);
         location.add(weatherInfo3);
-        location.add(weatherInfo4);         
+        location.add(weatherInfo4);        
         
-         List <WeatherInfo> wil = location.getHistory(LocalDate.now().minusDays(3), LocalDate.now().minusDays(1));
-         int count = 0;
-         for (WeatherInfo wi: wil) {
-             ++count;
-         }
-         Assert.assertEquals(1, count);         
+         List <WeatherInfo> wil = location.getHistory(LocalDate.now().minusDays(3), LocalDate.now().minusDays(1));        
+         Assert.assertEquals(1, wil.size());      
     }   
     
     @Test
-    public void shouldBeAbleToGetWeatherInfoBetweenDatesFromFile(){
-    	         
-         List <WeatherInfo> wil = location.getHistory(LocalDate.parse("2016-03-04"),LocalDate.parse("2016-03-08"));
-         
-         int count = 0;
-         for (WeatherInfo wi: wil) {
-             ++count;
-         }
-         Assert.assertEquals(3, count);          
+    public void shouldBeAbleToGetWeatherInfoBetweenDatesFromFile(){    	         
+         List <WeatherInfo> wil = location.getHistory(LocalDate.parse("2016-02-04"),LocalDate.parse("2016-02-08"));        
+         Assert.assertEquals(3, wil.size());          
     }   
+    
+    @Test
+    public void shouldBeAbleToGetWeatherInfoBetweenDatesFromWebAPI(){    	         
+         List <WeatherInfo> wil = location.getHistory(LocalDate.now().minusDays(3), LocalDate.now());         
+         Assert.assertEquals(2, wil.size());         
+    }   
+    
+    
 }
