@@ -1,3 +1,6 @@
 .git
-FootBallData/.gradle
-FootBallData/.idea
+.idea
+SoccerWebApi/.gradle
+SoccerWebApi/.idea
+SoccerWebApi/build
+SoccerWebApi/out
