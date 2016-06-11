@@ -10,15 +10,23 @@ import java.util.concurrent.CompletableFuture;
  */
 public class League {
 
+    private String league;
     private int id;
     private CompletableFuture<List<Standing>> standing;
     private String caption;
-    private LocalDate year;
+    private String year;
     private int currentMatchday;
     private int numberOfMatchdays;
     private List<Team> teams;
     private int numberOfGames;
     private Date lastUpdated;
+
+    public League(String caption, int id, String league, String year) {
+        this.caption = caption;
+        this.year = year;
+        this.id = id;
+        this.league = league;
+    }
 
     public CompletableFuture<List<Standing>> getLeagueTable(){
         return standing;
@@ -33,7 +41,7 @@ public class League {
     }
 
     public String getYear(){
-        return year.toString();
+        return year;
     }
 
     public int getCurrentMatchday(){
