@@ -1,4 +1,4 @@
-package domain.mapper;
+package footballapi.mapper;
 
 import domain.League;
 import footballapi.dto.SoccerSeasonDto;

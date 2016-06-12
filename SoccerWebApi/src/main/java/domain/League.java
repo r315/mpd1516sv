@@ -36,6 +36,8 @@ public class League {
         return id;
     }
 
+    public String getLeague(){return league;}
+
     public String getCaption(){
         return caption;
     }

@@ -1,6 +1,6 @@
 package domain;
 
-import domain.mapper.DtoToDomainMapper;
+import footballapi.mapper.DtoToDomainMapper;
 import footballapi.FootBallApiImpl;
 import org.junit.Test;
 import java.util.List;
@@ -16,6 +16,7 @@ public class MapperTest {
 
     @Test
     public void shouldBeAbbleToGetListOfLeagues(){
+        //TODO avoid connection
         List<League> leagues = DtoToDomainMapper.seasonsToLeagues(
                 new FootBallApiImpl().getSeasons()
         );

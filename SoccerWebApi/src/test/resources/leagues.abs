@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{title}}</title>
+    </head>
+    <body>
+        <h1>Leagues</h1>
+        <table width="100%" style="border-collapse:collapse" border="1">
+            {{#each this}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{year}}</td>
+                <td>{{league}}</td>
+                <td>{{caption}}</td>
+            </tr>
+            {{/each}}
+        </table>
+    </body>
+</html>
