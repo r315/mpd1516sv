@@ -27,7 +27,11 @@ public class HttpServer {
 
     public void run() throws Exception {
         server.start();
-        server.join();
+        //server.join();
+    }
+
+    public void stop() throws Exception {
+        server.stop();
     }
 
     public HttpServer addHandler(String path, Function<HttpServletRequest, String> handler) {
@@ -37,21 +41,21 @@ public class HttpServer {
 
     class HandlerServlet extends HttpServlet {
         private final Function<HttpServletRequest, String> handler;
-        private final Charset utf8;
+        private final Charset utf;
 
         public HandlerServlet(Function<HttpServletRequest, String> handler) {
             this.handler = handler;
-            utf8 = Charset.forName("utf-8");
+            utf = Charset.forName("UTF-8");
         }
 
         @Override
         public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, IOException {
 
-            resp.setContentType(String.format("text/plain; charset=%s", utf8.name()));
+            resp.setContentType(String.format("text/html; charset=%s", utf.name()));
 
             String respBody = handler.apply(req);
 
-            byte[] respBodyBytes = respBody.getBytes(utf8);
+            byte[] respBodyBytes = respBody.getBytes(utf);
             resp.setStatus(200);
             resp.setContentLength(respBodyBytes.length);
             OutputStream os = resp.getOutputStream();

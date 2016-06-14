@@ -1,8 +1,10 @@
 package footballapi;
 
 import com.google.gson.Gson;
-import footballapi.dto.SoccerSeasonDto;
-import footballapi.dto.SoccerTeamDto;
+import footballapi.dto.LeagueTableDto;
+import footballapi.dto.SeasonDto;
+import footballapi.dto.TeamDto;
+import footballapi.dto.TeamPlayersDto;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -30,7 +32,9 @@ public abstract class FootBallApi {
         return gson.fromJson(json, type);
     }
 
-    public abstract List<SoccerSeasonDto> getSeasons();
-    public abstract SoccerSeasonDto getSeason(int soccerseasonid);
-    public abstract SoccerTeamDto getTeam(int teamid);
+    public abstract List<SeasonDto> getSeasons();
+    public abstract SeasonDto getSeason(int soccerseasonid);
+    public abstract TeamDto getTeam(int teamid);
+    public abstract TeamPlayersDto getTeamPlayers(int teamid);
+    public abstract LeagueTableDto getLeagueTable(int soccerseasonid);
 }

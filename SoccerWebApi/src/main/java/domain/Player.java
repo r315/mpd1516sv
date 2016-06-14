@@ -1,7 +1,5 @@
 package domain;
 
-import java.time.LocalDate;
-
 /**
  * Created by hmr on 05/06/2016.
  */
@@ -9,13 +7,23 @@ public class Player {
 
     private String name;
     private String position;
-    private int jnumber;
-    private LocalDate birthdate;
+    private int jerseynumber;
+    private String dateofbirth;
     private String nationality;
-    private String contractFinal;
-    private String marketValue;
+    private String contractuntil;
+    private String marketvalue;
 
-    public String GetName(){
+    public Player(String name, String position, int jerseyNumber, String dateOfBirth, String nationality, String contractUntil, String marketValue) {
+        this.name = name;
+        this.position = position;
+        this.jerseynumber = jerseyNumber;
+        this.dateofbirth = dateOfBirth;
+        this.nationality = nationality;
+        this.contractuntil = contractUntil;
+        this.marketvalue = marketValue;
+    }
+
+    public String getName(){
         return name;
     }
 
@@ -24,11 +32,11 @@ public class Player {
     }
 
     public int getJerseyNumber(){
-        return jnumber;
+        return jerseynumber;
     }
 
-    public String getDataOfBirth(){
-        return birthdate.toString();
+    public String getDateOfBirth(){
+        return dateofbirth;
     }
 
     public String getNationality(){
@@ -36,10 +44,10 @@ public class Player {
     }
 
     public String getContractUntil(){
-            return contractFinal;
+            return contractuntil;
     }
 
     public String getMarketValue(){
-        return marketValue;
+        return marketvalue;
     }
 }

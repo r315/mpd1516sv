@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{title}}</title>
+    </head>
+    <body>
+        <h1>Players</h1>
+        <table width="100%" style="border-collapse:collapse" border="1">
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Jersey Number</th>
+                <th>Date Of Birth</th>
+                <th>Nationality</th>
+                <th>Contract Final</th>
+                <th>Market Value</th>
+            </tr>
+            {{#each this}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{position}}</td>
+                <td>{{jerseyNumber}}</td>
+                <td>{{dateOfBirth}}</td>
+                <td>{{nationality}}</td>
+                <td>{{contractUntil}}</td>
+                <td>{{marketValue}}</td>
+            </tr>
+            {{/each}}
+        </table>
+    </body>
+</html>

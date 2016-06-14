@@ -1,6 +1,5 @@
 package domain;
 
-import java.net.URL;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -12,9 +11,18 @@ public class Team {
     private String name;
     private String code;
     private String shortName;
-    private String value;
-    private URL url;
+
+    private String squadmarketvalue;
+    private String url;
     private CompletableFuture<List<Player>> players;
+
+    public Team(String name, String code, String shortName, String squadMarketValue, String url) {
+        this.name = name;
+        this.code = code;
+        this.shortName = shortName;
+        this.squadmarketvalue = squadMarketValue;
+        this.url = url;
+    }
 
     public String getName(){
         return name;
@@ -29,14 +37,15 @@ public class Team {
     }
 
     public String getSquadMarketValue(){
-        return value;
+        return squadmarketvalue;
     }
 
     public String getCrestUrl(){
-        return url.toString();
+        return url;
     }
 
     public CompletableFuture<List<Player>> getPlayers(){
         return players;
     }
+
 }

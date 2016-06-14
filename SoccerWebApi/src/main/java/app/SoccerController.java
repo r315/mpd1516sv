@@ -1,10 +1,17 @@
 package app;
 
+import domain.Standing;
+import domain.Team;
+import footballapi.FootBallApiImpl;
+import footballapi.dto.SeasonDto;
+import footballapi.dto.TeamDto;
+import footballapi.dto.TeamPlayersDto;
+import util.DtoToDomainMapper;
+import util.DomainToView;
 import httpserver.HttpServer;
 
-import javax.ws.rs.Path;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.PathParam;
+import java.util.List;
 
 /**
  * Created by hmr on 11/06/2016.
@@ -16,23 +23,48 @@ public class SoccerController {
     public SoccerController(){
         httpserver = new HttpServer(PORT)
                 .addHandler("/soccerapp/leagues/*", this::showLeagues)
-                .addHandler("/soccerapp/teams/*", this::showTeam)
-                .addHandler("/soccerapp/players/*",this::showPlayer);
+                .addHandler("/teams/*", this::showTeam)
+                .addHandler("/players/*",this::showPlayer);
     }
 
     public void start() throws Exception {
         httpserver.run();
     }
 
+    public void stop() throws Exception {
+        httpserver.stop();
+    }
+
+    // path /soccerapp/leagues/*
     public String showLeagues(HttpServletRequest req){
-        return "stub!!";  //handlebars here
+        //todo composable supplier
+        if(req.getPathInfo() == null) {
+            List<SeasonDto> ss = new FootBallApiImpl().getSeasons();
+            return DomainToView.domainToHtml("leagues", "leagues", DtoToDomainMapper.seasonsToLeagues(ss));
+        }
+        else{
+            int id = Integer.parseInt(req.getPathInfo().substring(1));
+            List<Standing> ss = DtoToDomainMapper.leagueTableToStandings(
+                    new FootBallApiImpl().getLeagueTable(id));
+            return DomainToView.domainToHtml("standingstable", "league"+id, ss);
+        }
+
     }
 
+    //Path "/teams/*"
     public String showTeam(HttpServletRequest req){
-        return "stub!!"; //handlebars here
+        int id = Integer.parseInt(req.getPathInfo().substring(1));
+        TeamDto team = new FootBallApiImpl().getTeam(id);
+        return DomainToView.domainToHtml("team","team"+id, DtoToDomainMapper.teamDtoToTeam(team));
     }
 
+    //Path "/players/*"
     public String showPlayer(HttpServletRequest req){
-        return "stub!!"; //handlebars here
+        int id = Integer.parseInt(req.getPathInfo().substring(1));
+        TeamPlayersDto teamplayers = new FootBallApiImpl().getTeamPlayers(id);
+        return DomainToView.domainToHtml("player","teamplayers"+id, DtoToDomainMapper.teamPlayersDtoToPlayers(teamplayers));
     }
+
+
+
 }

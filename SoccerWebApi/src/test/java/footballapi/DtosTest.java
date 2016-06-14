@@ -1,7 +1,8 @@
 package footballapi;
 
-import footballapi.dto.SoccerSeasonDto;
-import footballapi.dto.SoccerTeamDto;
+import footballapi.dto.LeagueTableDto;
+import footballapi.dto.SeasonDto;
+import footballapi.dto.TeamDto;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.*;
@@ -15,9 +16,9 @@ public class DtosTest {
 
 
     @Test
-    public void shouldBeAbbleToGetSoocerSeasonDto(){
+    public void shouldBeAbbleToGetSoccerSeasonDto(){
         int id = 394;
-        SoccerSeasonDto ss = new FootBallApiImpl().getSeason(id);
+        SeasonDto ss = new FootBallApiImpl().getSeason(id);
         assertThat(ss,notNullValue());
         assertThat(id, is(equalTo(ss.id)));
     }
@@ -25,8 +26,16 @@ public class DtosTest {
     @Test
     public void shouldBeAbbleToGetTeamDto(){
         int id = 61;
-        SoccerTeamDto ss = new FootBallApiImpl().getTeam(id);
+        TeamDto ss = new FootBallApiImpl().getTeam(id);
         assertThat(ss,notNullValue());
         assertThat("CFC", is(equalTo(ss.code)));
+    }
+
+    @Test
+    public void shouldBeAbbleToGetLeagueTableDto(){
+        int id = 394;
+        LeagueTableDto lt = new FootBallApiImpl().getLeagueTable(id);
+        assertThat(lt,notNullValue());
+        assertThat("1. Bundesliga 2015/16", is(equalTo(lt.leagueCaption)));
     }
 }

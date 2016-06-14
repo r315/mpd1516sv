@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{title}}</title>
+    </head>
+    <body>
+        <h1>Standings</h1>
+        <table width="100%" style="border-collapse:collapse" border="1">
+            <tr>
+                <th>Position</th>
+                <th>Team Name</th>
+                <th>Played Games</th>
+                <th>Points</th>
+                <th>Goals</th>
+                <th>Goals Against</th>
+                <th>Wins</th>
+                <th>Draws</th>
+                <th>Losses</th>
+            </tr>
+            {{#each this}}
+            <tr>
+                <td>{{position}}</td>
+                <td>{{teamName}}</td>
+                <td>{{playedGames}}</td>
+                <td>{{points}}</td>
+                <td>{{goals}}</td>
+                <td>{{goalsAgainst}}</td>
+                <td>{{wins}}</td>
+                <td>{{draws}}</td>
+                <td>{{losses}}</td>
+            </tr>
+            {{/each}}
+        </table>
+    </body>
+</html>

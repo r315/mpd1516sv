@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{title}}</title>
+    </head>
+    <body>
+        <h1>Team {{name}}</h1>
+        <ul>
+            <li>Code: {{code}}</li>
+            <li>Short Name: {{shortName}}</li>
+            <li>Market Value: {{squadMarketValue}}</li>
+        </ul>
+    </body>
+</html>
