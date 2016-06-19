@@ -10,7 +10,7 @@ import java.util.List;
 public class LeagueTableDto {
     public String leagueCaption;
     public int matchday;
-    public List<StandingDto> standing;
+    public List<StandingDto> standing; //TODO check soccerseasons/405/leagueTable
 
     public class StandingDto{
         public int position;

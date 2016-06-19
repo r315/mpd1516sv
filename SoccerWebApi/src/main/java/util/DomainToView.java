@@ -1,22 +1,25 @@
 package util;
 
 import com.github.jknack.handlebars.Handlebars;
-import com.github.jknack.handlebars.Template;
 import com.github.jknack.handlebars.io.ClassPathTemplateLoader;
 import com.github.jknack.handlebars.io.TemplateLoader;
-import domain.League;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
+
 
 /**
  * Created by hmr on 11/06/2016.
  */
 public class DomainToView {
+
+    private static final Logger log = LoggerFactory.getLogger(DomainToView.class);
 
     /**
      *
@@ -29,7 +32,7 @@ public class DomainToView {
     public static String domainToHtml(String templatename, String refuri, Object dom){
         String templateStr;
         TemplateLoader loader = new ClassPathTemplateLoader();
-        loader.setPrefix("/resources");
+        //loader.setPrefix("/resources");
         loader.setSuffix(".abs");
         Handlebars handlebars = new Handlebars(loader);
         try {
@@ -39,7 +42,8 @@ public class DomainToView {
             writer.write(templateStr);
             writer.close();
         } catch (IOException e) {
-            templateStr = "";
+            templateStr = "fail to load resource: " + e.getMessage();
+            log.error(templateStr);
         }
         return templateStr;
     }
