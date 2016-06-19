@@ -2,7 +2,7 @@ package htmltemplate;
 
 import domain.League;
 import domain.Standing;
-import util.DomainToView;
+import view.DomainToView;
 import org.junit.Test;
 
 import java.util.Arrays;

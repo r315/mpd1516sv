@@ -5,7 +5,7 @@ import footballapi.dto.LeagueTableDto;
 import footballapi.dto.SeasonDto;
 import footballapi.dto.TeamDto;
 import footballapi.dto.TeamPlayersDto;
-import util.Http;
+import httpserver.HttpGet;
 
 import java.util.List;
 
@@ -30,31 +30,30 @@ public class FootBallApiImpl extends FootBallApi {
         return uriGenerator(soccerTeamsURI(),id);
     }
 
-
-
     @Override
     public List<SeasonDto> getSeasons() {
-        return Http.getFromUri( soccerSeasonsURI(), str -> fromJson(str,new TypeToken<List<SeasonDto>>() {}.getType()));
+        return HttpGet.getFromUri(soccerSeasonsURI(), str -> fromJson(str, new TypeToken<List<SeasonDto>>() {
+        }.getType()));
     }
 
     @Override
     public SeasonDto getSeason(int soccerseasonid) {
-        return Http.getFromUri( soccerSeasonURI(soccerseasonid), str -> fromJson(str,SeasonDto.class));
+        return HttpGet.getFromUri(soccerSeasonURI(soccerseasonid), str -> fromJson(str, SeasonDto.class));
     }
 
     @Override
     public TeamDto getTeam(int teamid) {
-        return Http.getFromUri( soccerTeamURI(teamid), str -> fromJson(str,TeamDto.class));
+        return HttpGet.getFromUri(soccerTeamURI(teamid), str -> fromJson(str, TeamDto.class));
     }
 
     @Override
     public TeamPlayersDto getTeamPlayers(int teamid) {
-        return Http.getFromUri( teamPlayersURI(teamid), str -> fromJson(str,TeamPlayersDto.class));
+        return HttpGet.getFromUri(teamPlayersURI(teamid), str -> fromJson(str, TeamPlayersDto.class));
     }
 
     @Override
     public LeagueTableDto getLeagueTable(int soccerseasonid) {
-        return Http.getFromUri(leagueTableURI(soccerseasonid), str -> fromJson(str, LeagueTableDto.class));
+        return HttpGet.getFromUri(leagueTableURI(soccerseasonid), str -> fromJson(str, LeagueTableDto.class));
     }
 
 

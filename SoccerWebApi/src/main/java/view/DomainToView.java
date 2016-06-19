@@ -1,4 +1,4 @@
-package util;
+package view;
 
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.io.ClassPathTemplateLoader;
@@ -24,19 +24,19 @@ public class DomainToView {
     /**
      *
      * @param templatename  name of file containing html page template
-     * @param refuri        name of saved html page on file system
+     * @param outputname        name of saved html page on file system
      * @param dom           domain object
      * @return              html string
      */
 
-    public static String domainToHtml(String templatename, String refuri, Object dom){
+    public static String domainToHtml(String templatename, String outputname, Object dom){
         String templateStr;
         TemplateLoader loader = new ClassPathTemplateLoader();
         //loader.setPrefix("/resources");
         loader.setSuffix(".abs");
         Handlebars handlebars = new Handlebars(loader);
         try {
-            Path path = Paths.get(refuri + ".html");
+            Path path = Paths.get(outputname + ".html");
             templateStr = handlebars.compile(templatename).apply(dom);
             BufferedWriter writer = Files.newBufferedWriter(path);
             writer.write(templateStr);

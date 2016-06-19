@@ -9,12 +9,16 @@ import java.util.concurrent.CompletableFuture;
  * Created by hmr on 05/06/2016.
  */
 public class League {
-
-    private String league;
     private int id;
-    private CompletableFuture<List<Standing>> standing;
     private String caption;
+    private String league;
     private String year;
+
+    public void setStanding(CompletableFuture<List<Standing>> standing) {
+        this.standing = standing;
+    }
+
+    private CompletableFuture<List<Standing>> standing;
     private int currentMatchday;
     private int numberOfMatchdays;
     private List<Team> teams;

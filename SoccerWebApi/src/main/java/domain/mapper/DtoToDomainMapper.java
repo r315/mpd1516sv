@@ -1,4 +1,4 @@
-package util;
+package domain.mapper;
 
 import domain.League;
 import domain.Player;
@@ -24,7 +24,7 @@ public class DtoToDomainMapper {
                 .collect(Collectors.toList());
     }
 
-    public static League seasonToLeague(SeasonDto season){
+    public static League seasonDtoToLeague(SeasonDto season){
         return new League(season.caption,
                 season.id,
                 season.league,
@@ -50,7 +50,7 @@ public class DtoToDomainMapper {
     }
 
     public static List<League> seasonsToLeagues(List<SeasonDto> seasons){
-        return domainMapper(seasons, DtoToDomainMapper::seasonToLeague);
+        return domainMapper(seasons, DtoToDomainMapper::seasonDtoToLeague);
     }
 
     public static List<Standing> leagueTableToStandings(LeagueTableDto lt){

@@ -1,6 +1,6 @@
 package domain;
 
-import util.DtoToDomainMapper;
+import domain.mapper.DtoToDomainMapper;
 import footballapi.FootBallApiImpl;
 import org.junit.Test;
 import java.util.List;

@@ -7,6 +7,9 @@ import java.util.List;
 /**
  * Created by hmr on 13/06/2016.
  */
+
+//http://api.football-data.org/v1/soccerseasons/{id}/leagueTable
+
 public class LeagueTableDto {
     public String leagueCaption;
     public int matchday;
