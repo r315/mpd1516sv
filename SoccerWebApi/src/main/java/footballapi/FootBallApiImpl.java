@@ -32,28 +32,28 @@ public class FootBallApiImpl extends FootBallApi {
 
     @Override
     public List<SeasonDto> getSeasons() {
-        return HttpGet.getFromUri(soccerSeasonsURI(), str -> fromJson(str, new TypeToken<List<SeasonDto>>() {
+        return HttpGet.getSync(soccerSeasonsURI(), str -> fromJson(str, new TypeToken<List<SeasonDto>>() {
         }.getType()));
     }
 
     @Override
     public SeasonDto getSeason(int soccerseasonid) {
-        return HttpGet.getFromUri(soccerSeasonURI(soccerseasonid), str -> fromJson(str, SeasonDto.class));
+        return HttpGet.getSync(soccerSeasonURI(soccerseasonid), str -> fromJson(str, SeasonDto.class));
     }
 
     @Override
     public TeamDto getTeam(int teamid) {
-        return HttpGet.getFromUri(soccerTeamURI(teamid), str -> fromJson(str, TeamDto.class));
+        return HttpGet.getSync(soccerTeamURI(teamid), str -> fromJson(str, TeamDto.class));
     }
 
     @Override
     public TeamPlayersDto getTeamPlayers(int teamid) {
-        return HttpGet.getFromUri(teamPlayersURI(teamid), str -> fromJson(str, TeamPlayersDto.class));
+        return HttpGet.getSync(teamPlayersURI(teamid), str -> fromJson(str, TeamPlayersDto.class));
     }
 
     @Override
     public LeagueTableDto getLeagueTable(int soccerseasonid) {
-        return HttpGet.getFromUri(leagueTableURI(soccerseasonid), str -> fromJson(str, LeagueTableDto.class));
+        return HttpGet.getSync(leagueTableURI(soccerseasonid), str -> fromJson(str, LeagueTableDto.class));
     }
 
 

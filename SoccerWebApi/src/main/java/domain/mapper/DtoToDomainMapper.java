@@ -25,14 +25,14 @@ public class DtoToDomainMapper {
     }
 
     public static League seasonDtoToLeague(SeasonDto season){
-        return new League(season.caption,
+        return new League(
                 season.id,
+                season.caption,
                 season.league,
                 season.year);
-
     }
 
-    public static Standing leagueTableStandingToStanding(LeagueTableDto.StandingDto standing){
+    private static Standing leagueTableToStanding(LeagueTableDto.StandingDto standing){
         return new Standing(
                 standing.position, standing.teamName,standing.playedGames,
                 standing.points, standing.goals, standing.goalsAgainst,
@@ -54,13 +54,11 @@ public class DtoToDomainMapper {
     }
 
     public static List<Standing> leagueTableToStandings(LeagueTableDto lt){
-        return domainMapper(lt.standing, DtoToDomainMapper::leagueTableStandingToStanding);
+        return domainMapper(lt.standing, DtoToDomainMapper::leagueTableToStanding);
     }
 
 
     public static List<Player> teamPlayersDtoToPlayers(TeamPlayersDto teamplayers) {
         return domainMapper(teamplayers.players, DtoToDomainMapper::playerDtoToPlayer);
     }
-
-
 }

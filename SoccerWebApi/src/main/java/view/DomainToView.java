@@ -21,6 +21,19 @@ public class DomainToView {
 
     private static final Logger log = LoggerFactory.getLogger(DomainToView.class);
 
+
+    public static void fileWriter(String file, String data){
+        Path path = Paths.get(file + ".html");
+        BufferedWriter writer = null;
+        try {
+            writer = Files.newBufferedWriter(path);
+            writer.write(data);
+            writer.close();
+        } catch (IOException e) {
+            log.error("fail writing to file: " + e.getMessage());
+        }
+    }
+
     /**
      *
      * @param templatename  name of file containing html page template
@@ -30,19 +43,16 @@ public class DomainToView {
      */
 
     public static String domainToHtml(String templatename, String outputname, Object dom){
-        String templateStr;
+        String templateStr = "";
         TemplateLoader loader = new ClassPathTemplateLoader();
         //loader.setPrefix("/resources");
         loader.setSuffix(".abs");
         Handlebars handlebars = new Handlebars(loader);
         try {
-            Path path = Paths.get(outputname + ".html");
             templateStr = handlebars.compile(templatename).apply(dom);
-            BufferedWriter writer = Files.newBufferedWriter(path);
-            writer.write(templateStr);
-            writer.close();
+            //fileWriter(outputname + ".html",templateStr);
         } catch (IOException e) {
-            templateStr = "fail to load resource: " + e.getMessage();
+            templateStr = "fail opening tmplate: " + e.getMessage();
             log.error(templateStr);
         }
         return templateStr;

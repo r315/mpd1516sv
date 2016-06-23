@@ -2,8 +2,7 @@ package app;
 
 import domain.League;
 import domain.Standing;
-import footballapi.FootBallApiImpl;
-import footballapi.dto.SeasonDto;
+import footballapi.FootBallApi;
 import footballapi.dto.TeamDto;
 import footballapi.dto.TeamPlayersDto;
 import domain.mapper.DtoToDomainMapper;
@@ -11,52 +10,36 @@ import view.DomainToView;
 import httpserver.HttpServer;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by hmr on 11/06/2016.
  */
-public class SoccerController {
+public class SoccerController implements AutoCloseable{
+
     private static HttpServer httpserver;
-    private FootBallApiImpl footBallApi;
+    private FootBallApi footBallApi;
 
-    private Map<Integer,League> leagues;
-
-    public SoccerController(HttpServer srv){
+    public SoccerController(HttpServer srv, FootBallApi fb){
         httpserver = srv
                 .addHandler("/soccerapp/leagues/*", this::showLeagues)
                 .addHandler("/teams/*", this::showTeam)
                 .addHandler("/players/*",this::showPlayer);
-        footBallApi = new FootBallApiImpl();
+        footBallApi = fb;
     }
 
     public void startServer() throws Exception {
         httpserver.run();
     }
 
-    public void stopServer() throws Exception {
-        httpserver.stop();
-    }
-
-
     private String leagueList(){
-        leagues = new HashMap<Integer,League>();
         List<League> lg = DtoToDomainMapper.seasonsToLeagues(footBallApi.getSeasons());
-        for(League league : lg)
-            leagues.put(league.getId(),league);
-        return DomainToView.domainToHtml("leagueList", "leagues", leagues);
+        return DomainToView.domainToHtml("leagueList", "leagues", lg);
     }
 
     private String getLeague(int id){
-        League league = leagues.get(id);
-        if(league == null)
-            league = DtoToDomainMapper.seasonDtoToLeague(footBallApi.getSeason(id));
-        //if(league.getLeagueTable()==null)
-            //completable future...
-           //league. = DtoToDomainMapper.leagueTableToStandings(footBallApi.getLeagueTable(id));
-        return DomainToView.domainToHtml("standingstable", "league"+id, league);
+        List<Standing> standings = DtoToDomainMapper.leagueTableToStandings(footBallApi.getLeagueTable(id));
+        return DomainToView.domainToHtml("leaguestandings", "leaguestadings"+id, standings);
     }
 
 
@@ -89,5 +72,10 @@ public class SoccerController {
         int id = Integer.parseInt(req.getPathInfo().substring(1));
         TeamPlayersDto teamplayers = footBallApi.getTeamPlayers(id);
         return DomainToView.domainToHtml("player","teamplayers"+id, DtoToDomainMapper.teamPlayersDtoToPlayers(teamplayers));
+    }
+
+    @Override
+    public void close() throws Exception {
+        httpserver.stop();
     }
 }

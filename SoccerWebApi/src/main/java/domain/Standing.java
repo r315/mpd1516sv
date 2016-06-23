@@ -15,8 +15,6 @@ public class Standing {
     private int points;
     private int goals;
 
-
-
     private int goalsAgainst;
     private int wins;
     private int draws;

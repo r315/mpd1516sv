@@ -15,13 +15,14 @@ import static java.util.stream.Collectors.joining;
 public class HttpGet {
 
     public static final String API_KEY = "e6be69e445de45ff88f5218c60251f27";
+    public static final String API_HEADER = "X-Auth-Token";
 
-    public static <T> T  getFromUri(String urlStr, Function<String, T> converter) {
+    public static <T> T getSync(String urlStr, Function<String, T> converter) {
         URL url = null;
         try {
             url = new URL(urlStr);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestProperty("X-Auth-Token", API_KEY);
+            conn.setRequestProperty(API_HEADER, API_KEY);
             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             return converter.apply(reader.lines().collect(joining()));
         } catch (IOException e) {

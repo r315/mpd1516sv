@@ -17,10 +17,10 @@ public class HtmlPagesTest {
     public void shouldGetHtmlFromLeagueList() throws Exception {
 
         List<League> league = Arrays.asList(
-                new League("BL1", 394, "1. Bundesliga 2015/16", "2015"),
-                new League("BL3", 403, "3. Bundesliga 2015/16", "2015"),
-                new League("EL1", 425, "League One 2015/16", "2015"),
-                new League("SD", 400, "Segunda Division 2015/16", "2015")
+                new League(394,"BL1", "1. Bundesliga 2015/16", "2015"),
+                new League(403,"BL3", "3. Bundesliga 2015/16", "2015"),
+                new League(425,"EL1", "League One 2015/16", "2015"),
+                new League(400,"SD","Segunda Division 2015/16", "2015")
         );
         new DomainToView().domainToHtml("leagues","TestLeagues",league);
     }

@@ -14,26 +14,23 @@ public class League {
     private String league;
     private String year;
 
-    public void setStanding(CompletableFuture<List<Standing>> standing) {
-        this.standing = standing;
-    }
-
-    private CompletableFuture<List<Standing>> standing;
+    private CompletableFuture<List<Standing>> standings;
     private int currentMatchday;
     private int numberOfMatchdays;
     private List<Team> teams;
     private int numberOfGames;
     private Date lastUpdated;
 
-    public League(String caption, int id, String league, String year) {
+    public League(int id, String caption, String league, String year) {
         this.caption = caption;
         this.year = year;
         this.id = id;
         this.league = league;
     }
 
+
     public CompletableFuture<List<Standing>> getLeagueTable(){
-        return standing;
+        return standings;
     }
 
     public int getId(){
